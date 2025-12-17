@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::mouse;
 use iced::widget::canvas::{self, Canvas, Event, Geometry};
 use iced::widget::{column, row, slider, text};
@@ -7,7 +8,7 @@ use rand::Rng;
 use std::fmt::Debug;
 
 fn main() -> iced::Result {
-    iced::application(
+    iced::application::<_, _, _, _, executor::Default>(
         SierpinskiEmulator::default,
         SierpinskiEmulator::update,
         SierpinskiEmulator::view,

@@ -1,4 +1,5 @@
 use iced::event::{self, Event};
+use iced::executor;
 use iced::keyboard;
 use iced::keyboard::key;
 use iced::widget::{button, center, column, operation, pick_list, row, slider, text, text_input};
@@ -7,7 +8,7 @@ use iced::{Center, Element, Fill, Subscription, Task};
 use toast::{Status, Toast};
 
 pub fn main() -> iced::Result {
-    iced::application(App::default, App::update, App::view)
+    iced::application::<_, _, _, _, executor::Default>(App::default, App::update, App::view)
         .subscription(App::subscription)
         .run()
 }

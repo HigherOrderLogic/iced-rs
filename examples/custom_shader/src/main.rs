@@ -2,6 +2,7 @@ mod scene;
 
 use scene::Scene;
 
+use iced::executor;
 use iced::time::Instant;
 use iced::wgpu;
 use iced::widget::{center, checkbox, column, row, shader, slider, text};
@@ -9,9 +10,13 @@ use iced::window;
 use iced::{Center, Color, Element, Fill, Subscription};
 
 fn main() -> iced::Result {
-    iced::application(IcedCubes::default, IcedCubes::update, IcedCubes::view)
-        .subscription(IcedCubes::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        IcedCubes::default,
+        IcedCubes::update,
+        IcedCubes::view,
+    )
+    .subscription(IcedCubes::subscription)
+    .run()
 }
 
 struct IcedCubes {

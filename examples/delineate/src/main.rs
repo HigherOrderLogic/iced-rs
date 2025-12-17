@@ -1,14 +1,19 @@
 use iced::event::{self, Event};
+use iced::executor;
 use iced::mouse;
 use iced::widget::{self, column, container, row, scrollable, selector, space, text};
 use iced::window;
 use iced::{Center, Color, Element, Fill, Font, Point, Rectangle, Subscription, Task, Theme};
 
 pub fn main() -> iced::Result {
-    iced::application(Example::default, Example::update, Example::view)
-        .subscription(Example::subscription)
-        .theme(Theme::Dark)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .subscription(Example::subscription)
+    .theme(Theme::Dark)
+    .run()
 }
 
 #[derive(Default)]

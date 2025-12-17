@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::widget::{center, column, row, slider, text};
 use iced::{Center, Element};
 
@@ -11,7 +12,7 @@ use circular::Circular;
 use linear::Linear;
 
 pub fn main() -> iced::Result {
-    iced::application(
+    iced::application::<_, _, _, _, executor::Default>(
         LoadingSpinners::default,
         LoadingSpinners::update,
         LoadingSpinners::view,

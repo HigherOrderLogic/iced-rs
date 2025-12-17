@@ -1,9 +1,10 @@
+use iced::executor;
 use iced::futures;
 use iced::widget::{self, center, column, image, row, text};
 use iced::{Center, Element, Fill, Right, Task};
 
 pub fn main() -> iced::Result {
-    iced::application(Pokedex::new, Pokedex::update, Pokedex::view)
+    iced::application::<_, _, _, _, executor::Default>(Pokedex::new, Pokedex::update, Pokedex::view)
         .title(Pokedex::title)
         .run()
 }

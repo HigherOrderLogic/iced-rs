@@ -6,7 +6,7 @@
 //! use iced::Theme;
 //!
 //! pub fn main() -> iced::Result {
-//!     iced::application(u64::default, update, view)
+//!     iced::application::<_, _, _, _, executor::Default>(u64::default, update, view)
 //!         .theme(Theme::Dark)
 //!         .centered()
 //!         .run()
@@ -54,7 +54,7 @@ pub use timed::timed;
 /// use iced::widget::{button, column, text, Column};
 ///
 /// pub fn main() -> iced::Result {
-///     iced::application(u64::default, update, view).run()
+///     iced::application::<_, _, _, _, executor::Default>(u64::default, update, view).run()
 /// }
 ///
 /// #[derive(Debug, Clone)]
@@ -75,20 +75,21 @@ pub use timed::timed;
 ///     ]
 /// }
 /// ```
-pub fn application<State, Message, Theme, Renderer>(
+pub fn application<State, Message, Theme, Renderer, Executor>(
     boot: impl BootFn<State, Message>,
     update: impl UpdateFn<State, Message>,
     view: impl for<'a> ViewFn<'a, State, Message, Theme, Renderer>,
-) -> Application<impl Program<State = State, Message = Message, Theme = Theme>>
+) -> Application<impl Program<State = State, Message = Message, Theme = Theme, Executor = Executor>>
 where
     State: 'static,
     Message: Send + 'static,
     Theme: theme::Base,
     Renderer: program::Renderer,
+    Executor: iced_futures::Executor,
 {
     use std::marker::PhantomData;
 
-    struct Instance<State, Message, Theme, Renderer, Boot, Update, View> {
+    struct Instance<State, Message, Theme, Renderer, Executor, Boot, Update, View> {
         boot: Boot,
         update: Update,
         view: View,
@@ -96,14 +97,16 @@ where
         _message: PhantomData<Message>,
         _theme: PhantomData<Theme>,
         _renderer: PhantomData<Renderer>,
+        _executor: PhantomData<Executor>,
     }
 
-    impl<State, Message, Theme, Renderer, Boot, Update, View> Program
-        for Instance<State, Message, Theme, Renderer, Boot, Update, View>
+    impl<State, Message, Theme, Renderer, Executor, Boot, Update, View> Program
+        for Instance<State, Message, Theme, Renderer, Executor, Boot, Update, View>
     where
         Message: Send + 'static,
         Theme: theme::Base,
         Renderer: program::Renderer,
+        Executor: iced_futures::Executor,
         Boot: self::BootFn<State, Message>,
         Update: self::UpdateFn<State, Message>,
         View: for<'a> self::ViewFn<'a, State, Message, Theme, Renderer>,
@@ -112,7 +115,7 @@ where
         type Message = Message;
         type Theme = Theme;
         type Renderer = Renderer;
-        type Executor = iced_futures::backend::default::Executor;
+        type Executor = Executor;
 
         fn name() -> &'static str {
             let name = std::any::type_name::<State>();
@@ -154,6 +157,7 @@ where
             _message: PhantomData,
             _theme: PhantomData,
             _renderer: PhantomData,
+            _executor: PhantomData,
         },
         settings: Settings::default(),
         window: window::Settings::default(),

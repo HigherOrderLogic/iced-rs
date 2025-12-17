@@ -1,4 +1,5 @@
 use iced::alignment;
+use iced::executor;
 use iced::mouse;
 use iced::time::{self, milliseconds};
 use iced::widget::canvas::{Cache, Geometry, LineCap, Path, Stroke, stroke};
@@ -11,7 +12,7 @@ use iced::{
 pub fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(Clock::new, Clock::update, Clock::view)
+    iced::application::<_, _, _, _, executor::Default>(Clock::new, Clock::update, Clock::view)
         .subscription(Clock::subscription)
         .theme(Clock::theme)
         .run()

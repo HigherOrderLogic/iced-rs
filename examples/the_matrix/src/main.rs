@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::mouse;
 use iced::time::{self, milliseconds};
 use iced::widget::canvas;
@@ -8,9 +9,13 @@ use std::cell::RefCell;
 pub fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(TheMatrix::default, TheMatrix::update, TheMatrix::view)
-        .subscription(TheMatrix::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        TheMatrix::default,
+        TheMatrix::update,
+        TheMatrix::view,
+    )
+    .subscription(TheMatrix::subscription)
+    .run()
 }
 
 #[derive(Default)]

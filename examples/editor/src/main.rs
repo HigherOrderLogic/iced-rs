@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::highlighter;
 use iced::keyboard;
 use iced::widget::{
@@ -13,7 +14,7 @@ use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
 pub fn main() -> iced::Result {
-    iced::application(Editor::new, Editor::update, Editor::view)
+    iced::application::<_, _, _, _, executor::Default>(Editor::new, Editor::update, Editor::view)
         .theme(Editor::theme)
         .font(include_bytes!("../fonts/icons.ttf").as_slice())
         .default_font(Font::MONOSPACE)

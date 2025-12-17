@@ -1,9 +1,11 @@
+use iced::executor;
 use iced::system;
 use iced::widget::{button, center, column, text};
 use iced::{Element, Task};
 
 pub fn main() -> iced::Result {
-    iced::application(Example::new, Example::update, Example::view).run()
+    iced::application::<_, _, _, _, executor::Default>(Example::new, Example::update, Example::view)
+        .run()
 }
 
 #[derive(Default)]

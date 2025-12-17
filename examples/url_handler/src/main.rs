@@ -1,9 +1,10 @@
 use iced::event;
+use iced::executor;
 use iced::widget::{center, text};
 use iced::{Element, Subscription};
 
 pub fn main() -> iced::Result {
-    iced::application(App::default, App::update, App::view)
+    iced::application::<_, _, _, _, executor::Default>(App::default, App::update, App::view)
         .subscription(App::subscription)
         .run()
 }

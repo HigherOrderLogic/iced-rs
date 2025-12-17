@@ -5,6 +5,7 @@ mod preset;
 use grid::Grid;
 use preset::Preset;
 
+use iced::executor;
 use iced::time::{self, milliseconds};
 use iced::widget::{button, checkbox, column, container, pick_list, row, slider, text};
 use iced::{Center, Element, Fill, Function, Subscription, Task, Theme};
@@ -12,11 +13,15 @@ use iced::{Center, Element, Fill, Function, Subscription, Task, Theme};
 pub fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(GameOfLife::default, GameOfLife::update, GameOfLife::view)
-        .subscription(GameOfLife::subscription)
-        .theme(Theme::Dark)
-        .centered()
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        GameOfLife::default,
+        GameOfLife::update,
+        GameOfLife::view,
+    )
+    .subscription(GameOfLife::subscription)
+    .theme(Theme::Dark)
+    .centered()
+    .run()
 }
 
 struct GameOfLife {

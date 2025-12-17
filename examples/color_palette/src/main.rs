@@ -1,4 +1,5 @@
 use iced::alignment;
+use iced::executor;
 use iced::mouse;
 use iced::widget::canvas::{self, Canvas, Frame, Geometry, Path};
 use iced::widget::{Slider, column, row, text};
@@ -8,7 +9,7 @@ use std::marker::PhantomData;
 use std::ops::RangeInclusive;
 
 pub fn main() -> iced::Result {
-    iced::application(
+    iced::application::<_, _, _, _, executor::Default>(
         ColorPalette::default,
         ColorPalette::update,
         ColorPalette::view,

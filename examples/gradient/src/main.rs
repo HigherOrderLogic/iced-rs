@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::gradient;
 use iced::theme;
 use iced::widget::{checkbox, column, container, row, slider, space, text};
@@ -6,10 +7,14 @@ use iced::{Center, Color, Element, Fill, Radians, Theme, color};
 pub fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(Gradient::default, Gradient::update, Gradient::view)
-        .style(Gradient::style)
-        .transparent(true)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Gradient::default,
+        Gradient::update,
+        Gradient::view,
+    )
+    .style(Gradient::style)
+    .transparent(true)
+    .run()
 }
 
 #[derive(Debug, Clone, Copy)]

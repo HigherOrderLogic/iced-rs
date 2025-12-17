@@ -1,12 +1,17 @@
+use iced::executor;
 use iced::keyboard;
 use iced::time::{self, Duration, Instant, milliseconds};
 use iced::widget::{button, center, column, row, text};
 use iced::{Center, Element, Subscription};
 
 pub fn main() -> iced::Result {
-    iced::application(Stopwatch::default, Stopwatch::update, Stopwatch::view)
-        .subscription(Stopwatch::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Stopwatch::default,
+        Stopwatch::update,
+        Stopwatch::view,
+    )
+    .subscription(Stopwatch::subscription)
+    .run()
 }
 
 #[derive(Default)]

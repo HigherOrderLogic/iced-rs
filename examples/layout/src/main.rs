@@ -1,4 +1,5 @@
 use iced::border;
+use iced::executor;
 use iced::keyboard;
 use iced::mouse;
 use iced::widget::{
@@ -11,11 +12,15 @@ use iced::{
 };
 
 pub fn main() -> iced::Result {
-    iced::application(Layout::default, Layout::update, Layout::view)
-        .subscription(Layout::subscription)
-        .theme(Layout::theme)
-        .title(Layout::title)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Layout::default,
+        Layout::update,
+        Layout::view,
+    )
+    .subscription(Layout::subscription)
+    .theme(Layout::theme)
+    .title(Layout::title)
+    .run()
 }
 
 #[derive(Debug, Default)]

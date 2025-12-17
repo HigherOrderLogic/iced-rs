@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::widget::{Button, Column, Container, Slider};
 use iced::widget::{
     button, center_x, center_y, checkbox, column, image, radio, rich_text, row, scrollable, slider,
@@ -15,7 +16,7 @@ pub fn main() -> iced::Result {
     #[cfg(not(target_arch = "wasm32"))]
     tracing_subscriber::fmt::init();
 
-    iced::application(Tour::default, Tour::update, Tour::view)
+    iced::application::<_, _, _, _, executor::Default>(Tour::default, Tour::update, Tour::view)
         .title(Tour::title)
         .centered()
         .run()

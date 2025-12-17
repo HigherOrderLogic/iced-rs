@@ -1,10 +1,11 @@
+use iced::executor;
 use iced::widget::{
     button, column, container, operation, progress_bar, radio, row, scrollable, slider, space, text,
 };
 use iced::{Border, Center, Color, Element, Fill, Task, Theme};
 
 pub fn main() -> iced::Result {
-    iced::application(
+    iced::application::<_, _, _, _, executor::Default>(
         ScrollableDemo::default,
         ScrollableDemo::update,
         ScrollableDemo::view,

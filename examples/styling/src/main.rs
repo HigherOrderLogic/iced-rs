@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::keyboard;
 use iced::widget::{
     button, center_x, center_y, checkbox, column, container, pick_list, progress_bar, row, rule,
@@ -6,10 +7,14 @@ use iced::widget::{
 use iced::{Center, Element, Fill, Shrink, Subscription, Theme};
 
 pub fn main() -> iced::Result {
-    iced::application(Styling::default, Styling::update, Styling::view)
-        .subscription(Styling::subscription)
-        .theme(Styling::theme)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Styling::default,
+        Styling::update,
+        Styling::view,
+    )
+    .subscription(Styling::subscription)
+    .theme(Styling::theme)
+    .run()
 }
 
 #[derive(Default)]

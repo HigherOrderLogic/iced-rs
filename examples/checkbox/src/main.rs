@@ -1,12 +1,17 @@
+use iced::executor;
 use iced::widget::{center, checkbox, column, row, text};
 use iced::{Element, Font};
 
 const ICON_FONT: Font = Font::with_name("icons");
 
 pub fn main() -> iced::Result {
-    iced::application(Example::default, Example::update, Example::view)
-        .font(include_bytes!("../fonts/icons.ttf").as_slice())
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .font(include_bytes!("../fonts/icons.ttf").as_slice())
+    .run()
 }
 
 #[derive(Default)]

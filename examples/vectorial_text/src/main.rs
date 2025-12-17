@@ -1,10 +1,11 @@
 use iced::alignment;
+use iced::executor;
 use iced::mouse;
 use iced::widget::{canvas, checkbox, column, row, slider, space, text};
 use iced::{Center, Element, Fill, Point, Rectangle, Renderer, Theme, Vector};
 
 pub fn main() -> iced::Result {
-    iced::application(
+    iced::application::<_, _, _, _, executor::Default>(
         VectorialText::default,
         VectorialText::update,
         VectorialText::view,

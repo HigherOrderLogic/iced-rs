@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::font;
 use iced::time::{Duration, hours, minutes};
 use iced::widget::{
@@ -6,7 +7,7 @@ use iced::widget::{
 use iced::{Center, Element, Fill, Font, Right, Theme};
 
 pub fn main() -> iced::Result {
-    iced::application(Table::new, Table::update, Table::view)
+    iced::application::<_, _, _, _, executor::Default>(Table::new, Table::update, Table::view)
         .theme(Theme::CatppuccinMocha)
         .run()
 }

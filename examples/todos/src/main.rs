@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::keyboard;
 use iced::widget::{
     self, Text, button, center, center_x, checkbox, column, keyed_column, operation, row,
@@ -20,7 +21,7 @@ pub fn main() -> iced::Result {
 }
 
 fn application() -> Application<impl Program<Message = Message, Theme = Theme>> {
-    iced::application(Todos::new, Todos::update, Todos::view)
+    iced::application::<_, _, _, _, executor::Default>(Todos::new, Todos::update, Todos::view)
         .subscription(Todos::subscription)
         .title(Todos::title)
         .font(Todos::ICON_FONT)

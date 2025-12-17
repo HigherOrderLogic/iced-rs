@@ -1,11 +1,16 @@
 //! This example showcases an interactive `Canvas` for drawing Bézier curves.
+use iced::executor;
 use iced::widget::{button, container, hover, right, space};
 use iced::{Element, Theme};
 
 pub fn main() -> iced::Result {
-    iced::application(Example::default, Example::update, Example::view)
-        .theme(Theme::CatppuccinMocha)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .theme(Theme::CatppuccinMocha)
+    .run()
 }
 
 #[derive(Default)]

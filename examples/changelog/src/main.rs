@@ -2,6 +2,7 @@ mod changelog;
 
 use crate::changelog::Changelog;
 
+use iced::executor;
 use iced::font;
 use iced::widget::{
     button, center, column, container, markdown, pick_list, progress_bar, rich_text, row,
@@ -12,9 +13,13 @@ use iced::{Center, Element, Fill, FillPortion, Font, Task, Theme};
 pub fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(Generator::new, Generator::update, Generator::view)
-        .theme(Generator::theme)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Generator::new,
+        Generator::update,
+        Generator::view,
+    )
+    .theme(Generator::theme)
+    .run()
 }
 
 enum Generator {

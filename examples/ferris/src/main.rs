@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::time::Instant;
 use iced::widget::{center, checkbox, column, container, image, pick_list, row, slider, text};
 use iced::window;
@@ -7,7 +8,7 @@ use iced::{
 };
 
 pub fn main() -> iced::Result {
-    iced::application(Image::default, Image::update, Image::view)
+    iced::application::<_, _, _, _, executor::Default>(Image::default, Image::update, Image::view)
         .subscription(Image::subscription)
         .theme(Theme::TokyoNight)
         .run()

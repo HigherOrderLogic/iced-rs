@@ -2,12 +2,17 @@ use iced::event::{self, Event};
 use iced::widget::{Column, button, center, checkbox, text};
 use iced::window;
 use iced::{Center, Element, Fill, Subscription, Task};
+use iced::executor;
 
 pub fn main() -> iced::Result {
-    iced::application(Events::default, Events::update, Events::view)
-        .subscription(Events::subscription)
-        .exit_on_close_request(false)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Events::default,
+        Events::update,
+        Events::view,
+    )
+    .subscription(Events::subscription)
+    .exit_on_close_request(false)
+    .run()
 }
 
 #[derive(Debug, Default)]

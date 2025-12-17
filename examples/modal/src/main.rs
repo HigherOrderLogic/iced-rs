@@ -1,4 +1,5 @@
 use iced::event::{self, Event};
+use iced::executor;
 use iced::keyboard;
 use iced::keyboard::key;
 use iced::widget::{
@@ -10,7 +11,7 @@ use iced::{Bottom, Color, Element, Fill, Subscription, Task};
 use std::fmt;
 
 pub fn main() -> iced::Result {
-    iced::application(App::default, App::update, App::view)
+    iced::application::<_, _, _, _, executor::Default>(App::default, App::update, App::view)
         .subscription(App::subscription)
         .run()
 }

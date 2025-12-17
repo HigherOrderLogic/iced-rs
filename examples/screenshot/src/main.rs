@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::keyboard;
 use iced::widget::{button, center_y, column, container, image, row, text, text_input};
 use iced::window;
@@ -10,9 +11,13 @@ use ::image::ColorType;
 fn main() -> iced::Result {
     tracing_subscriber::fmt::init();
 
-    iced::application(Example::default, Example::update, Example::view)
-        .subscription(Example::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .subscription(Example::subscription)
+    .run()
 }
 
 #[derive(Default)]

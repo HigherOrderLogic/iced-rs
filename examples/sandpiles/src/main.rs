@@ -1,3 +1,4 @@
+use iced::executor;
 use iced::mouse;
 use iced::time;
 use iced::widget::canvas;
@@ -6,9 +7,13 @@ use iced::{Element, Event, Fill, Point, Rectangle, Renderer, Size, Subscription,
 use std::collections::{HashMap, HashSet};
 
 pub fn main() -> iced::Result {
-    iced::application(Sandpiles::new, Sandpiles::update, Sandpiles::view)
-        .subscription(Sandpiles::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Sandpiles::new,
+        Sandpiles::update,
+        Sandpiles::view,
+    )
+    .subscription(Sandpiles::subscription)
+    .run()
 }
 
 struct Sandpiles {

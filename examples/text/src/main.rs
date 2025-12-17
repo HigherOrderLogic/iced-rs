@@ -1,10 +1,11 @@
 use iced::event;
+use iced::executor;
 use iced::widget::{center, column, pick_list, right, stack, text};
 use iced::window;
 use iced::{Element, Event, Subscription, Task};
 
 pub fn main() -> iced::Result {
-    iced::application(Text::new, Text::update, Text::view)
+    iced::application::<_, _, _, _, executor::Default>(Text::new, Text::update, Text::view)
         .subscription(Text::subscription)
         .run()
 }

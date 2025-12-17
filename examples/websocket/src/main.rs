@@ -1,12 +1,17 @@
 mod echo;
 
+use iced::executor;
 use iced::widget::{button, center, column, operation, row, scrollable, text, text_input};
 use iced::{Center, Element, Fill, Subscription, Task, color};
 
 pub fn main() -> iced::Result {
-    iced::application(WebSocket::new, WebSocket::update, WebSocket::view)
-        .subscription(WebSocket::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        WebSocket::new,
+        WebSocket::update,
+        WebSocket::view,
+    )
+    .subscription(WebSocket::subscription)
+    .run()
 }
 
 struct WebSocket {

@@ -202,7 +202,7 @@
 //! use iced::Theme;
 //!
 //! pub fn main() -> iced::Result {
-//!     iced::application(new, update, view)
+//!     iced::application::<_, _, _, _, executor::Default>(new, update, view)
 //!         .theme(theme)
 //!         .run()
 //! }
@@ -349,7 +349,7 @@
 //! }
 //!
 //! pub fn main() -> iced::Result {
-//!     iced::application(new, update, view)
+//!     iced::application::<_, _, _, _, executor::Default>(new, update, view)
 //!         .subscription(subscription)
 //!         .run()
 //! }
@@ -706,5 +706,10 @@ where
     Theme: theme::Base + 'static,
     Renderer: program::Renderer + 'static,
 {
-    application(State::default, update, view).run()
+    application::<_, _, _, _, iced_futures::backend::default::Executor>(
+        State::default,
+        update,
+        view,
+    )
+    .run()
 }

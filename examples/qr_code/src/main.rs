@@ -1,12 +1,17 @@
+use iced::executor;
 use iced::widget::{center, column, pick_list, qr_code, row, slider, text, text_input, toggler};
 use iced::{Center, Element, Theme};
 
 use std::ops::RangeInclusive;
 
 pub fn main() -> iced::Result {
-    iced::application(QRGenerator::default, QRGenerator::update, QRGenerator::view)
-        .theme(QRGenerator::theme)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        QRGenerator::default,
+        QRGenerator::update,
+        QRGenerator::view,
+    )
+    .theme(QRGenerator::theme)
+    .run()
 }
 
 #[derive(Default)]

@@ -1,12 +1,17 @@
+use iced::executor;
 use iced::keyboard;
 use iced::widget::pane_grid::{self, PaneGrid};
 use iced::widget::{button, center_y, column, container, responsive, row, scrollable, text};
 use iced::{Center, Color, Element, Fill, Size, Subscription};
 
 pub fn main() -> iced::Result {
-    iced::application(Example::default, Example::update, Example::view)
-        .subscription(Example::subscription)
-        .run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .subscription(Example::subscription)
+    .run()
 }
 
 struct Example {

@@ -2,12 +2,18 @@ mod download;
 
 use download::download;
 
+use iced::executor;
 use iced::task;
 use iced::widget::{Column, button, center, column, progress_bar, text};
 use iced::{Center, Element, Function, Right, Task};
 
 pub fn main() -> iced::Result {
-    iced::application(Example::default, Example::update, Example::view).run()
+    iced::application::<_, _, _, _, executor::Default>(
+        Example::default,
+        Example::update,
+        Example::view,
+    )
+    .run()
 }
 
 #[derive(Debug)]
